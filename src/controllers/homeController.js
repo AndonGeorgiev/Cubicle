@@ -8,11 +8,12 @@ const renderHomePage = (req, res) => {
 }
 
 const renderAboutPage = (req, res) => {
-    res.render('about')
+    res.render('about');
 }
 
 
 router.get('/', renderHomePage);
 router.get('/about', renderAboutPage);
+
 
 module.exports = router;
