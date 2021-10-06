@@ -7,7 +7,12 @@ const renderHomePage = (req, res) => {
     res.render('index', { cubes });
 }
 
-router.get('/', renderHomePage);
+const renderAboutPage = (req, res) => {
+    res.render('about')
+}
 
+
+router.get('/', renderHomePage);
+router.get('/about', renderAboutPage);
 
 module.exports = router;
