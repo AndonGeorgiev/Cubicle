@@ -1,32 +1,32 @@
-const id = require('uniqid');
+const mongoose = require('mongoose');
 
-class Cube {
+let cubeSchema = new mongoose.Schema({
+    name: {
+        type: 'String',
+        required: true,
+    },
 
-    static cubes = [{
-        id: '8u8bcl7jkkufwnspu',
-        name: '1',
-        id: '8u8bcln6kkufwu74s',
-        name: 'Test cube one',
-        description: "Test description for test cube one. Test number one. It's ok isn't it? First test description ending here! ",
-        imageUrl: 'https://quizizz.com/_media/quizzes/426cb5fc-bf28-4535-8719-84eea612c50f_900_900',
-        difficulty: '6'
-    }];
+    description: {
+        type: 'String',
+        required: true,
+        maxLength: 100,
+    },
 
-    constructor(name, description, imageUrl, difficulty) {
-        this.id = id();
-        this.name = name;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.difficulty = difficulty;
-    };
+    imageUrl: {
+        type: 'String',
+        required: true,
+        validate: /^https?:\/\/[a-z, 0-9]+[.,\/][a-z]+[.,\/]/gmi
+    },
 
-    static getAll() {
-        return Cube.cubes;
-    }
+    difficulty: {
+        type: 'Number',
+        required: true,
+        min: [1, "Min value should is equal to 1!"],
+        max: [5, "Max value should is equal to 5!"],
+    },
 
-    static add(cube) {
-        Cube.cubes.push(cube);
-    }
-}
+});
+
+const Cube = mongoose.model('Cube', cubeSchema);
 
 module.exports = Cube;
