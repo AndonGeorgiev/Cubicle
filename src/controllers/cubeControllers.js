@@ -10,7 +10,6 @@ const renderCreatePage = (req, res) => {
 const createCube = (req, res) => {
     let { name, description, imageUrl, difficulty } = req.body;
     cubeServices.create(name, description, imageUrl, difficulty);
-    console.log(cubeServices.getAll());
     res.redirect('/');
     res.end();
 }
