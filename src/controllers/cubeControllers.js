@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const cubeServices = require('./../services/cubeServices');
-const cubeAccessoryController = require('./../controllers/cubeAccessoryController');
+const cubeServices = require('../services/cubeServices');
+const cubeAccessoryController = require('./cubeAccessoryController');
 
 const renderCreatePage = (req, res) => {
     res.render('create');

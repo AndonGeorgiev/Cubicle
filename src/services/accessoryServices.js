@@ -1,5 +1,7 @@
 const Accessory = require('../model/Accessory');
 
+const getAll = () => Accessory.find({}).lean();
+
 function creat(name, description, imageUrl) {
     return Accessory.create({
         name,
@@ -11,6 +13,7 @@ function creat(name, description, imageUrl) {
 
 const accessoryService = {
     creat,
+    getAll,
 }
 
 module.exports = accessoryService;

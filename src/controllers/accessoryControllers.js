@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const accessoryService = require('../services/accessoryServices')
+const accessoryService = require('../services/accessoryServices');
 
 const renderAddAccessoryPage = (req, res) => {
     res.render('accessory/create');
@@ -8,9 +8,7 @@ const renderAddAccessoryPage = (req, res) => {
 
 const createAccessory = async(req, res) => {
     const { name, description, imageUrl } = req.body;
-    let create = await accessoryService.creat(name, description, imageUrl);
-    console.log(create);
-
+    await accessoryService.creat(name, description, imageUrl);
     res.redirect('/')
 
 }
