@@ -28,7 +28,6 @@ const renderDetailsPage = async(req, res) => {
 
     }
 
-    console.log(accessoriesArray);
 
     res.render('details', { cube, accessoriesArray });
 
