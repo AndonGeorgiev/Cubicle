@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const cubeServices = require('./../services/cubeServices');
-const accessoryService = require('./../services/accessoryServices');
+const cubeServices = require('../services/cubeServices');
+const accessoryService = require('../services/accessoryServices');
 
 const renderAttachPage = async(req, res) => {
     let id = req.params.cubeId;
