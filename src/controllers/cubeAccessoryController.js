@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
 const cubeServices = require('../services/cubeServices');
-const accessoryService = require('../services/accessoryServices');
+const accessoryServices = require('../services/accessoryServices');
 
 const renderAttachPage = async(req, res) => {
     let id = req.params.cubeId;
     let cube = await cubeServices.getOne(id);
-    let accessory = await accessoryService.getAll();
+    let allAccessories = await accessoryServices.getAll();
+    let accessory = await accessoryServices.getOnlyNotAddedAccessories(cube.accessories);
+    console.log(accessory);
     res.render("attach", { cube, accessory });
 }
 
 const attachAccessory = async(req, res) => {
     let cubeId = req.params.cubeId;
     let accessoryId = req.body.accessory;
-
-    console.log(accessoryId);
 
     await cubeServices.attach(cubeId, accessoryId);
 

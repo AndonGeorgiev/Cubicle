@@ -21,14 +21,15 @@ const renderDetailsPage = async(req, res) => {
     let cube = await cubeServices.getOne(id);
     let accessories = cube.accessories;
     let accessoriesArray = [];
+    console.log(accessories);
+
 
     for (const accessory of accessories) {
+        console.log(accessory);
         let accessoryInfo = await accessoryService.getOne(accessory._id);
         accessoriesArray.push(accessoryInfo);
 
     }
-
-
     res.render('details', { cube, accessoriesArray });
 
 }
