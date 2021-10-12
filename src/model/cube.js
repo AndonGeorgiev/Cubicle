@@ -25,6 +25,11 @@ let cubeSchema = new mongoose.Schema({
         max: [5, "Max value should is equal to 5!"],
     },
 
+    accessories: [{
+        type: "ObjectId",
+        ref: "accessories",
+    }]
+
 });
 
 const Cube = mongoose.model('Cube', cubeSchema);

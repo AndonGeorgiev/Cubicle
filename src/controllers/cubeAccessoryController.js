@@ -10,6 +10,18 @@ const renderAttachPage = async(req, res) => {
     res.render("attach", { cube, accessory });
 }
 
+const attachAccessory = async(req, res) => {
+    let cubeId = req.params.cubeId;
+    let accessoryId = req.body.accessory;
+
+    console.log(accessoryId);
+
+    await cubeServices.attach(cubeId, accessoryId);
+
+    res.redirect(`/cube/${cubeId}`);
+}
+
 router.get('/add', renderAttachPage);
+router.post('/add', attachAccessory);
 
 module.exports = router
