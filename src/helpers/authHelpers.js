@@ -1,8 +1,8 @@
-const jwt = require('josnwebtoken');
+const jwt = require('jsonwebtoken');
 
-exports.jwtSing = function(playload, secret) {
+exports.jwtSign = function(payload, secret) {
     let promise = new Promise((resolve, reject) => {
-        jwt.sing(playload, secret, function(err, token) {
+        jwt.sign(payload, secret, function(err, token) {
             if (err) {
                 reject(err);
             } else {
