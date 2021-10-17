@@ -16,8 +16,14 @@ const register = async(req, res) => {
     res.redirect('/');
 }
 
+const renderLoginPage = (req, res) => {
+    res.render('auth/login');
+}
+
 
 router.get('/register', renderRegisterPage);
 router.post('/register', register);
+router.get('/login', renderLoginPage);
+
 
 module.exports = router;
