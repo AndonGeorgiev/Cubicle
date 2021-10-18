@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
-app.use(express.urlencoded({ extended: true }));
 const path = require('path');
 const routes = require('./routes');
 require('./config/handlebars')(app);
 const initDatabase = require('./config/database');
+const cookie_parser = require('cookie-parser');
 
+app.use(cookie_parser());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, './static')));;
 app.use(routes);
 
