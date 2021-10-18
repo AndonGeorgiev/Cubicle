@@ -1,5 +1,6 @@
 const User = require('../model/User');
-const authHelpers = require('../helpers/authHelpers')
+const authHelpers = require('../helpers/authHelpers');
+const { SECRET } = require('../constants');
 
 function register(username, password, repeatPassword) {
     if (password !== repeatPassword) {
@@ -29,9 +30,7 @@ function createToken(user) {
         username: user.username,
     };
 
-    let secret = '<<Hn%=:LuQ(*<?V"S<8x4_bOrK*62=B;SaouFn9issT@3)NY,M_5cZ}i1ysNqOq'
-
-    return authHelpers.jwtSign(payload, secret);
+    return authHelpers.jwtSign(payload, SECRET);
 
 }
 
