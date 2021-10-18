@@ -13,17 +13,33 @@ const register = async(req, res) => {
     await authServices.register(username, password, repeatPassword);
 
 
-    res.redirect('/');
+    res.redirect('/login');
 }
 
 const renderLoginPage = (req, res) => {
     res.render('auth/login');
 }
 
+const login = async(req, res) => {
+    const { username, password } = req.body;
+
+    let user = await authServices.login(username, password);
+
+    let token = await authServices.createToken(user);
+
+    res.cookie('app_token', token, {
+        httpOnly: true,
+    });
+
+    res.redirect('/');
+
+}
+
 
 router.get('/register', renderRegisterPage);
 router.post('/register', register);
 router.get('/login', renderLoginPage);
+router.post('/login', login);
 
 
 module.exports = router;

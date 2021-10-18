@@ -1,4 +1,5 @@
 const User = require('../model/User');
+const authHelpers = require('../helpers/authHelpers')
 
 function register(username, password, repeatPassword) {
     if (password !== repeatPassword) {
@@ -6,6 +7,20 @@ function register(username, password, repeatPassword) {
     }
 
     return User.create({ username, password });
+}
+
+async function login(username, password) {
+
+    let user = await User.findOne({ username: username });
+    let comparePassword = await user.compare(password);
+    console.log(comparePassword);
+
+    if (comparePassword) {
+        return user
+    } else {
+        return null
+    }
+
 }
 
 function createToken(user) {
@@ -22,6 +37,7 @@ function createToken(user) {
 
 const authServices = {
     register,
+    login,
     createToken,
 }
 
