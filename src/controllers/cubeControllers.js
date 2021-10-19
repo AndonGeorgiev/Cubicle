@@ -3,6 +3,7 @@ const router = express.Router();
 const cubeServices = require('../services/cubeServices');
 const cubeAccessoryController = require('./cubeAccessoryController');
 const accessoryService = require('../services/accessoryServices');
+const { isAuth } = require('../middlewares/authMiddlewares');
 
 const renderCreatePage = (req, res) => {
     res.render('create');
@@ -21,7 +22,6 @@ const renderDetailsPage = async(req, res) => {
     let cube = await cubeServices.getOne(id);
     let accessories = cube.accessories;
     let accessoriesArray = [];
-    console.log(accessories);
 
 
     for (const accessory of accessories) {
@@ -34,9 +34,19 @@ const renderDetailsPage = async(req, res) => {
 
 }
 
+const renderDeletePage = async(req, res) => {
+    let cubeId = req.params.cubeId;
+    let cube = await cubeServices.getOne(cubeId);
+
+    res.render('deleteCube', { cube });
+}
+
 router.get('/create', renderCreatePage);
 router.post('/create', createCube);
 router.get('/:cubeId', renderDetailsPage);
+router.get('/:cubeId/delete', isAuth, renderDeletePage)
+
+
 router.use('/:cubeId/accessory', cubeAccessoryController);
 
 
