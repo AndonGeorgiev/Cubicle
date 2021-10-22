@@ -27,13 +27,16 @@ const attach = async(cubeId, accessoryId) => {
 
 const deleteOne = (id) => Cube.findByIdAndDelete(id);
 
+const update = (id, cube) => Cube.findOneAndUpdate(id, cube, { runValidators: true });
+
 
 const cubeServices = {
     getAll,
-    create,
     getOne,
+    create,
     attach,
     deleteOne,
+    update,
 }
 
 module.exports = cubeServices;
