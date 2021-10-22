@@ -5,6 +5,8 @@ const cubeAccessoryController = require('./cubeAccessoryController');
 const accessoryService = require('../services/accessoryServices');
 const { isAuth } = require('../middlewares/authMiddlewares');
 
+
+//CREATE
 const renderCreatePage = (req, res) => {
     res.render('create');
 }
@@ -17,6 +19,7 @@ const createCube = (req, res) => {
     res.end();
 }
 
+// DETAILS
 const renderDetailsPage = async(req, res) => {
     let id = req.params.cubeId;
     let cube = await cubeServices.getOne(id);
@@ -34,6 +37,8 @@ const renderDetailsPage = async(req, res) => {
 
 }
 
+
+//DELETE
 const renderDeletePage = async(req, res) => {
     let cubeId = req.params.cubeId;
     let cube = await cubeServices.getOne(cubeId);
@@ -48,11 +53,23 @@ const deleteCube = async(req, res) => {
     res.redirect('/')
 }
 
+
+//EDIT
+const renderEditPage = async(req, res) => {
+    let cube = await cubeServices.getOne(req.params.cubeId);
+    res.render('editCube', { cube });
+}
+
+//create
 router.get('/create', renderCreatePage);
 router.post('/create', createCube);
+//details
 router.get('/:cubeId', renderDetailsPage);
+//delete
 router.get('/:cubeId/delete', isAuth, renderDeletePage);
-router.post('/:cubeId/delete', isAuth, deleteCube)
+router.post('/:cubeId/delete', isAuth, deleteCube);
+//edit
+router.get('/:cubeId/edit', isAuth, renderEditPage);
 
 
 router.use('/:cubeId/accessory', cubeAccessoryController);
